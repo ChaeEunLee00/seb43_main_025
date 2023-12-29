@@ -43,7 +43,7 @@ public class WebRtcConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(kurentoHandler(), "/groupcall")
-                .setAllowedOrigins("http://localhost:3000","http://thegong.site", "https://thegong.site")
+                .setAllowedOrigins("http://localhost:3000","http://thegong.site", "https://thegong.site", "https://seb43-main-025.vercel.app") //여기에!"https://seb43-main-025.vercel.app" 이거 추가해야겠당
                 .withSockJS();
     }
 }
