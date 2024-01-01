@@ -39,9 +39,8 @@ public class MemberController {
     @PostMapping("/add")
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody) {
         Member member = mapper.postDtoToMember(requestBody);
-        ResponseEntity checkMember = memberService.verifyExistsCheck(member.getEmail());
+        memberService.verifyExistsEmail(member.getEmail());
 
-        if (checkMember != null) return checkMember;
         String profile = s3ImageService.getDefaultProfileImage();
         memberService.createMember(member, profile);
         return new ResponseEntity<>(profile, HttpStatus.CREATED);

@@ -1,7 +1,6 @@
 package com.codestates.member.service;
 
 import com.codestates.auth.utils.ErrorResponse;
-import com.codestates.common.search.SearchService;
 import com.codestates.exception.BusinessLogicException;
 import com.codestates.exception.ExceptionCode;
 import com.codestates.member.dto.MemberDto;
@@ -10,11 +9,9 @@ import com.codestates.member.entity.Member;
 import com.codestates.member.entity.MemberRoom;
 import com.codestates.member.entity.MemberTag;
 import com.codestates.member.repository.MemberRepository;
-import com.codestates.room.repository.RoomRepository;
 import com.codestates.tag.entity.Tag;
 import com.codestates.member.repository.MemberTagRepository;
 import com.codestates.tag.repository.TagRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,12 +37,9 @@ public class MemberService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     public Member createMember(Member member, String profile) {
-        verifyExistsEmail(member.getEmail());
         String encryptedPassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encryptedPassword);
-        member.setPassword(member.getPassword());
         member.setImageUrl(profile);
         Member saveMember = memberRepository.save(member);
         return saveMember;
@@ -144,22 +138,10 @@ public class MemberService {
     }
 
 
-    private void verifyExistsEmail(String email) {
+    public void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
         if (member.isPresent())
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXIST);
-    }
-
-
-    public ResponseEntity<ErrorResponse> verifyExistsCheck(String email) {
-        Optional<Member> memberEmail = memberRepository.findByEmail(email);
-
-        if (memberEmail.isPresent()) {
-            ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST, "이미 사용중인 이메일입니다.");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-        }
-        //verifyExistsNickname(String.valueOf(memberNickname));
-        return null;
     }
 
 

@@ -28,5 +28,4 @@ public enum ExceptionCode {
         this.status = status;
         this.message = message;
     }
-
 }
