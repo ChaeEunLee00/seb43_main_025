@@ -34,8 +34,8 @@ public class MemberDetailService implements UserDetailsService {
 
     public static class MemberDetail extends Member implements UserDetails {
 
-        private Member member;
-        MemberDetail(Member member){ //s가 영향이 있다.
+        //private Member member;
+        MemberDetail(Member member){
             setMemberId(member.getMemberId());
             setNickname(member.getNickname());
             setImageUrl(member.getImageUrl());

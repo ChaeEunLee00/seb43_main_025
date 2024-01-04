@@ -28,11 +28,14 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         try {
             Map<String, Object> claims = verifyJws(request);
             setAuthenticationToContext(claims);
-        } catch (SignatureException se) {
+        }
+        catch (SignatureException se) {
             request.setAttribute("exception", se);
-        } catch (ExpiredJwtException ee) {
+        }
+        catch (ExpiredJwtException ee) {
             request.setAttribute("exception", ee);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             request.setAttribute("exception", e);
         }
         filterChain.doFilter(request,response);
@@ -49,9 +52,9 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
     private void setAuthenticationToContext(Map<String, Object> claims) { // 사용자 인증•권한정보 생성해서 SecurityContextHolder 에 저장
         Map<String, Object> principal = new HashMap<>();
-        log.info("memberId : "+claims.get("memberId"));
-        log.info("username : "+claims.get("username"));
-        log.info("isAdmin : "+claims.get("isAdmin"));
+        //log.info("memberId : "+claims.get("memberId"));
+        //log.info("username : "+claims.get("username"));
+        //log.info("isAdmin : "+claims.get("isAdmin"));
 
         principal.put("memberId", claims.get("memberId"));
         principal.put("username", claims.get("username"));

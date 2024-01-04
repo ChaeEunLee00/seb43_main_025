@@ -16,7 +16,7 @@ import java.io.IOException;
 public class MemberAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException ae) throws IOException, ServletException {
-        log.error("Login Failed 로그인 인증실패 : {}", ae.getMessage());
+        //log.error("Login Failed 로그인 인증실패 : {}", ae.getMessage());
         sendErrorResponse(response);
     }
 
