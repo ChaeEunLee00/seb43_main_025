@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MemberAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        log.info("Login Successful 로그인 인증성공");
+        //log.info("Login Successful 로그인 인증성공");
 
         MemberDetailService.MemberDetail memberDetail = (MemberDetailService.MemberDetail) authentication.getPrincipal();
         Long memberId = memberDetail.getMemberId();

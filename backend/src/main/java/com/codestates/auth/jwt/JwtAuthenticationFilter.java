@@ -39,19 +39,16 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
-        log.info("attemptAuthentication start");
+        //log.info("attemptAuthentication start");
         ObjectMapper objectMapper = new ObjectMapper();
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
 
-
         String email = loginDto.getEmail();
-        log.info("email : "+email);
-
-
+        //log.info("email : "+email);
 
         if(isDeletedMember(email)) throw new AuthenticationServiceException("Cannot login");
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
-        log.info("attemptAuthentication end");
+        //log.info("attemptAuthentication end");
         return authenticationManager.authenticate(authenticationToken); //내부적으로 인증 후 Authentication 객체반환
 
     }
