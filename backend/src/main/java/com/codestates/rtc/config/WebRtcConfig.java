@@ -30,7 +30,7 @@ public class WebRtcConfig implements WebSocketConfigurer {
 
     @Bean
     public KurentoClient kurentoClient() {
-        return KurentoClient.create("ws://3.36.54.32:8888/kurento");
+        return KurentoClient.create("ws://43.201.251.71:8888/kurento");
     } //test
 
     @Bean
